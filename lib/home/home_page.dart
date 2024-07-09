@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
     {
       'name': 'Bitcoin',
       'symbol': 'BTC',
-      'price': '\$2,509.75',
+      'price': '2,509.75',
       'change': '+2.5%',
       'color': Color(0xFF9146FF),
       'image': "assets/images/btc.png",
@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     {
       'name': 'Ethereum',
       'symbol': 'ETH',
-      'price': '\$2,000',
+      'price': '2,000',
       'change': '-1.2%',
       'color': Color(0xFF4A4E69),
       'image': "assets/images/ETH.png",
@@ -76,6 +76,26 @@ class _HomePageState extends State<HomePage> {
 
               SizedBox(height: 20),
               _buildChart(),
+
+              SizedBox(height: 20),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildTimeAmountButton('15mins'),
+                  _buildTimeAmountButton('10\$'),
+                ],
+              ),
+
+              SizedBox(height: 20),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildPredictionButton('BUY', Colors.green),
+                  _buildPredictionButton('SELL', Colors.red),
+                ],
+              ),
               SizedBox(height: 20),
               _buildPrediction(),
               SizedBox(height: 20),
@@ -140,7 +160,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildAddCard() {
     return Container(
-      width: 250,
+      width: 100,
       margin: EdgeInsets.symmetric(horizontal: 8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -179,13 +199,7 @@ class _HomePageState extends State<HomePage> {
       ),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildPredictionButton('BUY', Colors.green),
-              _buildPredictionButton('SELL', Colors.red),
-            ],
-          ),
+
           SizedBox(height: 16),
           Text(
             'Your Prediction',
@@ -209,6 +223,34 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget _buildTimeAmountButton(String label) {
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 8),
+        padding: EdgeInsets.symmetric(vertical: 16),
+        decoration: BoxDecoration(
+          color: Color(0xFF4A4E69),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(width: 0,),
+              Icon(Icons.remove, color: Color(0xFF9146FF),),
+              Text(
+                label,
+                style: TextStyle(color: Colors.white,),
+              ),
+              Icon(Icons.add, color: Color(0xFF9146FF)),
+              SizedBox(width: 0,),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildPredictionButton(String label, Color color) {
     return Expanded(
       child: Container(
@@ -216,12 +258,12 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Center(
           child: Text(
             label,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ),
       ),
