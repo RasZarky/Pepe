@@ -8,33 +8,72 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  final List<Map<String, dynamic>> assets = [
+    {
+      'name': 'Bitcoin',
+      'symbol': 'BTC',
+      'price': '\$2,509.75',
+      'change': '+2.5%',
+      'color': Color(0xFF9146FF),
+      'image': "assets/images/btc.png",
+    },
+    {
+      'name': 'Ethereum',
+      'symbol': 'ETH',
+      'price': '\$2,000',
+      'change': '-1.2%',
+      'color': Color(0xFF4A4E69),
+      'image': "assets/images/ETH.png",
+    },
+    // Add more assets here
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xFF1F1C2C),
-      // appBar: AppBar(
-      //   backgroundColor: Color(0xFF1F1C2C),
-      //   elevation: 0,
-      //   leading: IconButton(
-      //     icon: Icon(Icons.arrow_back_ios),
-      //     onPressed: () {},
-      //   ),
-      //   actions: [
-      //     IconButton(
-      //       icon: Icon(Icons.lock),
-      //       onPressed: () {},
-      //     ),
-      //   ],
-      // ),
       body: SafeArea(
         child: SingleChildScrollView(
 
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeader(),
-              SizedBox(height: 20),
-              _buildAssets(),
+              const SizedBox(height: 20),
+              const Text("Assets",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 10),
+
+            Container(
+              height: 70, // Set the height for the horizontal list
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: assets.length + 1, // Add one more item for the add card
+                itemBuilder: (context, index) {
+                  if (index == assets.length) {
+                    return _buildAddCard();
+                  } else {
+                    final asset = assets[index];
+                    return _buildAssetCard(
+                      asset['name'],
+                      asset['symbol'],
+                      asset['price'],
+                      asset['change'],
+                      asset['color'],
+                      asset['image'],
+                    );
+                  }
+                },
+              ),
+            ),
+
               SizedBox(height: 20),
               _buildChart(),
               SizedBox(height: 20),
@@ -59,33 +98,57 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildAssets() {
-    return Row(
-      children: [
-        _buildAssetCard('Bitcoin', 'BTC', '\$2,509.75', '+3.77%', Color(0xFF9146FF)),
-        SizedBox(width: 8),
-        _buildAssetCard('Ethereum', 'ETH', '\$2,509.75', '+9.77%', Color(0xFF4A4E69)),
-      ],
+  Widget _buildAssetCard(String name, String symbol, String price, String change, Color color, String image) {
+    return Container(
+      width: 200,
+      margin: EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          Image.asset(image, width: 50, height: 50),
+          SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(name, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis), softWrap: true,),
+                  const SizedBox(width: 10,),
+                  Text(symbol, style: TextStyle(color: Colors.white)),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(price, style: TextStyle(color: Colors.white, overflow: TextOverflow.ellipsis), softWrap: true,),
+                  const SizedBox(width: 10,),
+                  Text(change, style: TextStyle(color: change.startsWith('+') ? Colors.green : Colors.red, overflow: TextOverflow.ellipsis), softWrap: true,),
+                ],
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 
-  Widget _buildAssetCard(String name, String symbol, String price, String change, Color color) {
-    return Expanded(
-      child: Container(
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(name, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-            Text(symbol, style: TextStyle(color: Colors.white)),
-            Text(price, style: TextStyle(color: Colors.white)),
-            Text(change, style: TextStyle(color: change.startsWith('+') ? Colors.green : Colors.red)),
-          ],
-        ),
+  Widget _buildAddCard() {
+    return Container(
+      width: 250,
+      margin: EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Color(0xFF4A4E69),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Center(
+        child: Icon(Icons.add, color: Colors.white, size: 50),
       ),
     );
   }
