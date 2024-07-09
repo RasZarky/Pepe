@@ -96,10 +96,47 @@ class _HomePageState extends State<HomePage> {
                   _buildPredictionButton('SELL', Colors.red),
                 ],
               ),
-              SizedBox(height: 5),
+              SizedBox(height: 15),
               _buildPrediction(),
-              SizedBox(height: 20),
-              _buildPredictionsList(),
+              const Text("Predictions",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              ),
+
+              Container(
+                height: 330,
+                child: ListView(
+                  children: [
+                    OrderCard(
+                      type: 'SELL',
+                      amount: '\$2,500.00',
+                      btcAmount: '0.0000046 BTC',
+                      color: Colors.red,
+                    ),
+                    OrderCard(
+                      type: 'BUY',
+                      amount: '\$4,500.00',
+                      btcAmount: '0.0000056 BTC',
+                      color: Colors.green,
+                    ),
+                    OrderCard(
+                      type: 'SELL',
+                      amount: '\$2,500.00',
+                      btcAmount: '0.0000046 BTC',
+                      color: Colors.red,
+                    ),
+                    OrderCard(
+                      type: 'BUY',
+                      amount: '\$4,500.00',
+                      btcAmount: '0.0000056 BTC',
+                      color: Colors.green,
+                    ),
+                  ],
+                ),
+              ),
+
             ],
           ),
         ),
@@ -192,7 +229,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildPrediction() {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.only(right: 16, bottom: 25),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -274,48 +311,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildPredictionsList() {
-    return Column(
-      children: [
-        _buildPredictionCard('SELL', '\$2,500.00', 'BTC BNB', '0.0000046 BTC', Colors.red),
-        _buildPredictionCard('BUY', '\$4,500.00', 'BTC BNB', '0.0000056 BTC', Colors.green),
-        _buildPredictionCard('SELL', '\$2,500.00', 'BTC BNB', '0.0000046 BTC', Colors.red),
-        _buildPredictionCard('BUY', '\$4,500.00', 'BTC BNB', '0.0000056 BTC', Colors.green),
-      ],
-    );
-  }
-
-  Widget _buildPredictionCard(String action, String price, String pair, String amount, Color color) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 8),
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Color(0xFF3B3A4D),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Icon(
-            action == 'BUY' ? Icons.arrow_upward : Icons.arrow_downward,
-            color: color,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(price, style: TextStyle(color: Colors.white)),
-              Text(pair, style: TextStyle(color: Colors.grey)),
-              Text(amount, style: TextStyle(color: Colors.grey)),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildBottomNavigationBar() {
     return BottomNavigationBar(
-      backgroundColor: Color(0xFF1F1C2C),
+      backgroundColor: Color(0xFF4A4E69),
       selectedItemColor: Colors.deepPurpleAccent,
       unselectedItemColor: Colors.white,
       items: [
@@ -336,6 +334,104 @@ class _HomePageState extends State<HomePage> {
           label: 'Profile',
         ),
       ],
+    );
+  }
+}
+
+class OrderCard extends StatelessWidget {
+  final String type;
+  final String amount;
+  final String btcAmount;
+  final Color color;
+
+  OrderCard({required this.type, required this.amount, required this.btcAmount, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Color(0xFF4A4E69),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        color: color.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Icon(
+                        type == 'SELL' ? Icons.arrow_downward : Icons.arrow_upward,
+                        color: color,
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      type,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10,),
+                const Row(
+                  children: [
+                    Text(
+                      'BTC',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                    ),
+                    Text(
+                      'BNB',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  amount,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  btcAmount,
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
