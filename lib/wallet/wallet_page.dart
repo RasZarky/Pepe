@@ -62,7 +62,7 @@ class _WalletPageState extends State<WalletPage> {
                                 icon: Icon(Icons.arrow_drop_down, color: Colors
                                     .white),
                                 underline: SizedBox(),
-                                items: <String>['USD', 'EUR', 'GBP']
+                                items: <String>['USD', 'EUR', 'GBP', 'GHC']
                                     .map<DropdownMenuItem<String>>((String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
@@ -143,8 +143,8 @@ class _WalletPageState extends State<WalletPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _buildRecommendedCard('BNB', '+1.37', '216.3'),
-                    _buildRecommendedCard('ADL', '+2.72', '0.4976'),
+                    _buildRecommendedCard('assets/images/bnb.png', '+1.37', '216.3'),
+                    _buildRecommendedCard('assets/images/adl.png', '+2.72', '0.4976'),
                   ],
                 ),
                 SizedBox(height: 20),
@@ -167,7 +167,7 @@ class _WalletPageState extends State<WalletPage> {
   }
 }
 
-Widget _buildRecommendedCard(String name, String change, String value) {
+Widget _buildRecommendedCard(String image, String change, String value) {
   return Container(
     width: 150,
     padding: EdgeInsets.all(16),
@@ -178,22 +178,24 @@ Widget _buildRecommendedCard(String name, String change, String value) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          name,
-          style: TextStyle(color: Colors.white, fontSize: 16),
-        ),
-        SizedBox(height: 10),
-        Text(
-          change,
-          style: TextStyle(
-            color: change.contains('-') ? Colors.red : Colors.green,
-            fontSize: 14,
-          ),
-        ),
-        SizedBox(height: 5),
-        Text(
-          value,
-          style: TextStyle(color: Colors.grey, fontSize: 12),
+        Image.asset(image),
+        SizedBox(height: 30),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              change,
+              style: TextStyle(
+                color: change.contains('-') ? Colors.red : Colors.green,
+                fontSize: 14,
+              ),
+            ),
+
+            Text(
+              value,
+              style: TextStyle(color: Colors.grey, fontSize: 12),
+            ),
+          ],
         ),
       ],
     ),
