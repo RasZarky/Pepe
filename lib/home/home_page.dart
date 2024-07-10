@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:crypto_market/Crypto_Market/Model/coin_model.dart';
 import 'package:crypto_market/Crypto_Market/Screens/coin_candle_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pepe/home/widgets/asset_card.dart';
 import 'package:pepe/home/widgets/header.dart';
@@ -38,6 +41,34 @@ class _HomePageState extends State<HomePage> {
     },
     // Add more assets here
   ];
+
+  late Timer _timer;
+  int _start = 20;
+
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+          (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+            running = false;
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +141,12 @@ class _HomePageState extends State<HomePage> {
 
               SizedBox(height: 20),
 
-              running ? _runningSection() :
+              running ? Column(
+                children: [
+                  _runningSection(),
+                  SizedBox(height: 20,)
+                ],
+              ) :
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -173,119 +209,132 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomNavigationBarWidget(),
     );
+
 }
 
   Widget _runningSection(){
-    return Container(
-      padding: EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Color(0xFF191B2A),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                'ASSET',
-                style: TextStyle(color: Colors.grey),
-              ),
-              SizedBox(width: 20),
-              Text(
-                'L/S',
-                style: TextStyle(color: Colors.grey),
-              ),
-              SizedBox(width: 20),
-              Text(
-                '\$',
-                style: TextStyle(color: Colors.grey),
-              ),
-              SizedBox(width: 20),
-              Text(
-                'PAYOUT',
-                style: TextStyle(color: Colors.grey),
-              ),
-            ],
-          ),
-          SizedBox(height: 4.0),
-          Row(
-            children: [
-              Text(
-                'BTC',
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(width: 20),
-              Text(
-                'BUY',
-                style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(width: 20),
-              Text(
-                '\$5',
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(width: 20),
-              Text(
-                '+\$4.30',
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          SizedBox(height: 12.0),
-          Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'OPEN PRICE',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  SizedBox(height: 4.0),
-                  Text(
-                    '62,463.4451',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              SizedBox(width: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'RESULT',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  SizedBox(height: 4.0),
-                  Icon(
-                    Icons.emoji_emotions,
-                    color: Colors.purple,
-                  ),
-                ],
-              ),
-              Spacer(),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
-                decoration: BoxDecoration(
-                  color: Color(0xFF3A4AC7),
-                  borderRadius: BorderRadius.circular(4.0),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          children: [
+
+            const Row(
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      'ASSET',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      'BTC',
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
-                child: Text(
-                  'TIME LEFT',
-                  style: TextStyle(color: Colors.white),
+
+                SizedBox( width: 20,),
+
+                Column(
+                  children: [
+                    Text(
+                      'L/S',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      'BUY',
+                      style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
+
+                SizedBox( width: 20,),
+
+                Column(
+                  children: [
+                    Text(
+                      '\$',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      '\$5',
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+
+                SizedBox( width: 20,),
+
+                Column(
+                  children: [
+                    Text(
+                      'PAYOUT',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      '+\$4.30',
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                )
+              ],
+            ),
+
+            SizedBox(height: 20,),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Column(
+                  children: [
+                    Text(
+                      'OPEN PRICE',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      '62,463.4451',
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                SizedBox( width: 60,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    const Text(
+                      'RESULT',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Image.asset("assets/images/LOSS.png")
+                  ],
+                )
+              ],
+            )
+
+          ],
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+          decoration: BoxDecoration(
+            color: Colors.blue.withOpacity(.4),
+            borderRadius: BorderRadius.circular(4.0),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              const Text(
+                'TIME LEFT',
+                style: TextStyle(color: Colors.white),
               ),
-              SizedBox(width: 8.0),
               Text(
-                '00:20',
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                '00:$_start',
+                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -426,6 +475,7 @@ class _HomePageState extends State<HomePage> {
           setState(() {
             running = true;
           });
+          startTimer();
         },
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 8),
