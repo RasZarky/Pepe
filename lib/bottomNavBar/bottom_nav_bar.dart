@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:pepe/home/home_page.dart';
+import 'package:pepe/wallet/wallet_page.dart';
 
 class BottomNavigationBarWidget extends StatefulWidget {
+  final int selectedindex;
+
+  const BottomNavigationBarWidget({super.key, required this.selectedindex});
+
   @override
   _BottomNavigationBarWidgetState createState() => _BottomNavigationBarWidgetState();
 }
 
 class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
-  int _selectedIndex = 0;
+
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index == 1 && widget.selectedindex != 1){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const WalletPage()));
+    } else if(index == 0 && widget.selectedindex != 0){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage()));
+    }
   }
  //ToDo Complete this part
   @override
@@ -24,7 +32,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.wallet),
-          label: '',
+          label: 'Wallet',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.loop),
@@ -35,7 +43,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
           label: '',
         ),
       ],
-      currentIndex: _selectedIndex,
+      currentIndex: widget.selectedindex,
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.grey,
       backgroundColor: Color(0xFF181A20),
