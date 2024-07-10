@@ -154,10 +154,10 @@ class _WalletPageState extends State<WalletPage> {
                 ),
                 SizedBox(height: 10),
                 _buildAssetCard(
-                    'Bitcoin', '\$4,500.00', '-4.5%', '0.0000056 BTC'),
-                _buildAssetCard('Tether', '\$2,200.00', '+4.5%', '2,600 USDT'),
-                _buildAssetCard('Etherium', '\$2,000.00', '+2.1%', '0.0034 ETH'),
-                _buildAssetCard('Chain Link', '\$800.00', '+2.1%', '0.0034 ETH'),
+                    'assets/images/bitcoin.png', '\$4,500.00', '-4.5%', '0.0000056 BTC'),
+                _buildAssetCard('assets/images/tether.png', '\$2,200.00', '+4.5%', '2,600 USDT'),
+                _buildAssetCard('assets/images/ether.png', '\$2,000.00', '+2.1%', '0.0034 ETH'),
+                _buildAssetCard('assets/images/chain.png', '\$800.00', '+2.1%', '0.0034 ETH'),
               ],
             ),
           ),
@@ -211,23 +211,33 @@ Widget _buildAssetCard(
       color: Color(0xFF1C1C44),
       borderRadius: BorderRadius.circular(16),
     ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    child: Column(
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Image.asset(name),
             Text(
-              name,
+              amount,
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
-            SizedBox(height: 10),
-            Text(
-              change,
-              style: TextStyle(
-                color: change.contains('-') ? Colors.red : Colors.green,
-                fontSize: 14,
-              ),
+          ],
+        ),
+        SizedBox(height: 20,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Image.asset(change.contains('-') ? "assets/images/bear.png" : "assets/images/bull.png"),
+                Text(
+                  change,
+                  style: TextStyle(
+                    color: change.contains('-') ? Colors.red : Colors.green,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 5),
             Text(
@@ -235,10 +245,6 @@ Widget _buildAssetCard(
               style: TextStyle(color: Colors.grey, fontSize: 12),
             ),
           ],
-        ),
-        Text(
-          amount,
-          style: TextStyle(color: Colors.white, fontSize: 16),
         ),
       ],
     ),
