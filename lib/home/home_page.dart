@@ -21,6 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   bool running = false;
+  bool ended = false;
 
   final List<Map<String, dynamic>> assets = [
     {
@@ -54,6 +55,7 @@ class _HomePageState extends State<HomePage> {
           setState(() {
             timer.cancel();
             running = false;
+            ended = true;
           });
         } else {
           setState(() {
@@ -144,9 +146,14 @@ class _HomePageState extends State<HomePage> {
               running ? Column(
                 children: [
                   _runningSection(),
-                  SizedBox(height: 20,)
+                  const SizedBox(height: 20,)
                 ],
-              ) :
+              ) : ended ? Column(
+                children: [
+                  _endedSection(),
+                  const SizedBox(height: 20,)
+                ],
+              )  :
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -330,6 +337,131 @@ class _HomePageState extends State<HomePage> {
               Text(
                 '00:$_start',
                 style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _endedSection(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const Column(
+          children: [
+
+            Row(
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      'ASSET',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      'BTC',
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+
+                SizedBox( width: 20,),
+
+                Column(
+                  children: [
+                    Text(
+                      'L/S',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      'BUY',
+                      style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+
+                SizedBox( width: 20,),
+
+                Column(
+                  children: [
+                    Text(
+                      '\$',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      '\$5',
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+
+                SizedBox( width: 20,),
+
+                Column(
+                  children: [
+                    Text(
+                      'DURATION',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      '00:20',
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                )
+              ],
+            ),
+
+            SizedBox(height: 20,),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      'OPEN PRICE',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      '62,463.4451',
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                SizedBox( width: 30,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      'CLOSURE PRICE',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      '\$62,463.44',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                )
+              ],
+            )
+
+          ],
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 4.0),
+          decoration: BoxDecoration(
+            color: Color(0xFF4A4E69),
+            borderRadius: BorderRadius.circular(4.0),
+          ),
+          child: Row(
+            children: [
+              Image.asset("assets/images/LOSS.png", width: 30, height: 30,),
+              const Text(
+                '+\$4.30',
+                style: TextStyle(color: Colors.white, fontSize: 20,),
               ),
             ],
           ),
