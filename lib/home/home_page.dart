@@ -17,6 +17,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  bool running = false;
+
   final List<Map<String, dynamic>> assets = [
     {
       'name': 'Bitcoin',
@@ -91,6 +93,9 @@ class _HomePageState extends State<HomePage> {
               Container(
                 height: 400,
                 padding: EdgeInsets.only(top: 6),
+                decoration: BoxDecoration(
+                    color: Color(0xFF4A4E69),
+                    borderRadius: BorderRadius.circular(15.0),),
                   child: candleChart()),
 
               SizedBox(height: 20),
@@ -105,17 +110,23 @@ class _HomePageState extends State<HomePage> {
 
               SizedBox(height: 20),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              running ? _runningSection() :
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildPredictionButton('BUY', Colors.green),
-                  _buildPredictionButton('SELL', Colors.red),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildPredictionButton('BUY', Colors.green),
+                      _buildPredictionButton('SELL', Colors.red),
+                    ],
+                  ),
+
+                  SizedBox(height: 15),
+
+                  BuildPrediction(),
                 ],
               ),
-
-              SizedBox(height: 15),
-
-              BuildPrediction(),
 
               const Text("Predictions",
                 style: TextStyle(
@@ -164,6 +175,120 @@ class _HomePageState extends State<HomePage> {
     );
 }
 
+  Widget _runningSection(){
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Color(0xFF191B2A),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                'ASSET',
+                style: TextStyle(color: Colors.grey),
+              ),
+              SizedBox(width: 20),
+              Text(
+                'L/S',
+                style: TextStyle(color: Colors.grey),
+              ),
+              SizedBox(width: 20),
+              Text(
+                '\$',
+                style: TextStyle(color: Colors.grey),
+              ),
+              SizedBox(width: 20),
+              Text(
+                'PAYOUT',
+                style: TextStyle(color: Colors.grey),
+              ),
+            ],
+          ),
+          SizedBox(height: 4.0),
+          Row(
+            children: [
+              Text(
+                'BTC',
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(width: 20),
+              Text(
+                'BUY',
+                style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(width: 20),
+              Text(
+                '\$5',
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(width: 20),
+              Text(
+                '+\$4.30',
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          SizedBox(height: 12.0),
+          Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'OPEN PRICE',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  SizedBox(height: 4.0),
+                  Text(
+                    '62,463.4451',
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              SizedBox(width: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'RESULT',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  SizedBox(height: 4.0),
+                  Icon(
+                    Icons.emoji_emotions,
+                    color: Colors.purple,
+                  ),
+                ],
+              ),
+              Spacer(),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+                decoration: BoxDecoration(
+                  color: Color(0xFF3A4AC7),
+                  borderRadius: BorderRadius.circular(4.0),
+                ),
+                child: Text(
+                  'TIME LEFT',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              SizedBox(width: 8.0),
+              Text(
+                '00:20',
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildAddCard() {
     return Container(
       width: 100,
@@ -173,8 +298,8 @@ class _HomePageState extends State<HomePage> {
         color: Color(0xFF4A4E69),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Center(
-        child: Icon(Icons.add, color: Colors.white, size: 50),
+      child: const Center(
+        child: Icon(Icons.add, color: Color(0xFF9146FF), size: 50),
       ),
     );
   }
@@ -296,46 +421,28 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildPredictionButton(String label, Color color) {
     return Expanded(
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 8),
-        padding: EdgeInsets.symmetric(vertical: 16),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Center(
-          child: Text(
-            label,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+      child: GestureDetector(
+        onTap: (){
+          setState(() {
+            running = true;
+          });
+        },
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 8),
+          padding: EdgeInsets.symmetric(vertical: 16),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Center(
+            child: Text(
+              label,
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      backgroundColor: Color(0xFF4A4E69),
-      selectedItemColor: Colors.deepPurpleAccent,
-      unselectedItemColor: Colors.white,
-      items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.account_balance_wallet),
-          label: 'Wallet',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.loop),
-          label: 'Loop',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
-        ),
-      ],
-    );
-  }
 }

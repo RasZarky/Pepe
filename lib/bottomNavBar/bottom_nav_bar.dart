@@ -23,7 +23,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.wallet_giftcard),
+          icon: Icon(Icons.wallet),
           label: '',
         ),
         BottomNavigationBarItem(
