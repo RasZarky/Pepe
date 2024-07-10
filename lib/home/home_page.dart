@@ -45,17 +45,23 @@ class _HomePageState extends State<HomePage> {
 
   late Timer _timer;
   int _start = 20;
+  String action = "BUY";
 
   void startTimer() {
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,
-          (Timer timer) {
+          (Timer timer) async {
         if (_start == 0) {
           setState(() {
             timer.cancel();
             running = false;
             ended = true;
+
+          });
+          await Future.delayed(const Duration(seconds: 3));
+          setState(() {
+            ended = false;
           });
         } else {
           setState(() {
@@ -99,10 +105,10 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 10),
 
             Container(
-              height: 70, // Set the height for the horizontal list
+              height: 70,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: assets.length + 1, // Add one more item for the add card
+                itemCount: assets.length + 1,
                 itemBuilder: (context, index) {
                   if (index == assets.length) {
                     return _buildAddCard();
@@ -226,9 +232,9 @@ class _HomePageState extends State<HomePage> {
         Column(
           children: [
 
-            const Row(
+            Row(
               children: [
-                Column(
+                const Column(
                   children: [
                     Text(
                       'ASSET',
@@ -241,24 +247,24 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
 
-                SizedBox( width: 20,),
+                const SizedBox( width: 20,),
 
                 Column(
                   children: [
-                    Text(
+                    const Text(
                       'L/S',
                       style: TextStyle(color: Colors.grey),
                     ),
                     Text(
-                      'BUY',
-                      style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                      action,
+                      style: TextStyle(color: action == "BUY" ? Colors.green : Colors.red, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
 
-                SizedBox( width: 20,),
+                const SizedBox( width: 20,),
 
-                Column(
+                const Column(
                   children: [
                     Text(
                       '\$',
@@ -271,9 +277,9 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
 
-                SizedBox( width: 20,),
+                const SizedBox( width: 20,),
 
-                Column(
+                const Column(
                   children: [
                     Text(
                       'PAYOUT',
@@ -349,12 +355,12 @@ class _HomePageState extends State<HomePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Column(
+        Column(
           children: [
 
             Row(
               children: [
-                Column(
+                const Column(
                   children: [
                     Text(
                       'ASSET',
@@ -367,24 +373,24 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
 
-                SizedBox( width: 20,),
+                const SizedBox( width: 20,),
 
                 Column(
                   children: [
-                    Text(
+                    const Text(
                       'L/S',
                       style: TextStyle(color: Colors.grey),
                     ),
                     Text(
-                      'BUY',
-                      style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                      action,
+                      style: TextStyle(color: action == "BUY" ? Colors.green : Colors.red, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
 
-                SizedBox( width: 20,),
+                const SizedBox( width: 20,),
 
-                Column(
+                const Column(
                   children: [
                     Text(
                       '\$',
@@ -397,9 +403,9 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
 
-                SizedBox( width: 20,),
+                const SizedBox( width: 20,),
 
-                Column(
+                const Column(
                   children: [
                     Text(
                       'DURATION',
@@ -414,9 +420,9 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
 
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
 
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Column(
@@ -605,6 +611,8 @@ class _HomePageState extends State<HomePage> {
       child: GestureDetector(
         onTap: (){
           setState(() {
+            action = label;
+            _start = 20;
             running = true;
           });
           startTimer();
