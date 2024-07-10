@@ -48,33 +48,45 @@ class _WalletPageState extends State<WalletPage> {
                             'My Wallet',
                             style: TextStyle(color: Colors.white, fontSize: 16),
                           ),
-                          DropdownButton<String>(
-                            value: 'USD',
-                            dropdownColor: Color(0xFF1C1C44),
-                            icon: Icon(Icons.arrow_drop_down, color: Colors
-                                .white),
-                            underline: SizedBox(),
-                            items: <String>['USD', 'EUR', 'GBP']
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  value,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {},
+                          Container(
+                            height: 40,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              color: Color(0xFF4A4E69),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Center(
+                              child: DropdownButton<String>(
+                                value: 'USD',
+                                dropdownColor: Color(0xFF1C1C44),
+                                icon: Icon(Icons.arrow_drop_down, color: Colors
+                                    .white),
+                                underline: SizedBox(),
+                                items: <String>['USD', 'EUR', 'GBP']
+                                    .map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(
+                                      value,
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  );
+                                }).toList(),
+                                onChanged: (String? newValue) {},
+                              ),
+                            ),
                           ),
                         ],
                       ),
                       SizedBox(height: 10),
-                      Text(
-                        '\$8,540.00',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
+                      Center(
+                        child: Text(
+                          '\$8,540.00',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       SizedBox(height: 20),
@@ -89,9 +101,9 @@ class _WalletPageState extends State<WalletPage> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 32, vertical: 16),
+                                  horizontal: 5, vertical: 16),
                             ),
-                            child: Text('Transfer'),
+                            child: Image.asset("assets/images/transfer.png"),
                           ),
                           ElevatedButton(
                             onPressed: () {},
@@ -101,9 +113,9 @@ class _WalletPageState extends State<WalletPage> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 32, vertical: 16),
+                                  horizontal: 5, vertical: 16),
                             ),
-                            child: Text('Deposit'),
+                            child: Image.asset("assets/images/deposite.png"),
                           ),
                           ElevatedButton(
                             onPressed: () {},
@@ -113,9 +125,9 @@ class _WalletPageState extends State<WalletPage> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 32, vertical: 16),
+                                  horizontal: 5, vertical: 16),
                             ),
-                            child: Text('Swap'),
+                            child: Image.asset("assets/images/swap.png"),
                           ),
                         ],
                       ),
