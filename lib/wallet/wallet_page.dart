@@ -79,8 +79,8 @@ class _WalletPageState extends State<WalletPage> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
-                      Center(
+                      const SizedBox(height: 10),
+                      const Center(
                         child: Text(
                           '\$8,540.00',
                           style: TextStyle(
