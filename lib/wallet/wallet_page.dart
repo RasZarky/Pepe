@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -33,106 +34,108 @@ class _WalletPageState extends State<WalletPage> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Container(
-                  padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF1C1C44),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'My Wallet',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                          Container(
-                            height: 40,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              color: Color(0xFF4A4E69),
-                              borderRadius: BorderRadius.circular(20),
+                SlideInRight(
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF1C1C44),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'My Wallet',
+                              style: TextStyle(color: Colors.white, fontSize: 16),
                             ),
-                            child: Center(
-                              child: DropdownButton<String>(
-                                value: 'USD',
-                                dropdownColor: Color(0xFF1C1C44),
-                                icon: Icon(Icons.arrow_drop_down, color: Colors
-                                    .white),
-                                underline: SizedBox(),
-                                items: <String>['USD', 'EUR', 'GBP', 'GHC']
-                                    .map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(
-                                      value,
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  );
-                                }).toList(),
-                                onChanged: (String? newValue) {},
+                            Container(
+                              height: 40,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                color: Color(0xFF4A4E69),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: DropdownButton<String>(
+                                  value: 'USD',
+                                  dropdownColor: Color(0xFF1C1C44),
+                                  icon: Icon(Icons.arrow_drop_down, color: Colors
+                                      .white),
+                                  underline: SizedBox(),
+                                  items: <String>['USD', 'EUR', 'GBP', 'GHC']
+                                      .map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {},
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      const Center(
-                        child: Text(
-                          '\$8,540.00',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        const Center(
+                          child: Text(
+                            '\$8,540.00',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF9A4DFF),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                        SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFF9A4DFF),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 16),
                               ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 5, vertical: 16),
+                              child: Image.asset("assets/images/transfer.png"),
                             ),
-                            child: Image.asset("assets/images/transfer.png"),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF353353),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFF353353),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 16),
                               ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 5, vertical: 16),
+                              child: Image.asset("assets/images/deposite.png"),
                             ),
-                            child: Image.asset("assets/images/deposite.png"),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF353353),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFF353353),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 16),
                               ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 5, vertical: 16),
+                              child: Image.asset("assets/images/swap.png"),
                             ),
-                            child: Image.asset("assets/images/swap.png"),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(height: 20),
@@ -141,12 +144,15 @@ class _WalletPageState extends State<WalletPage> {
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
                 SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _buildRecommendedCard('assets/images/bnb.png', '+1.37', '216.3', size),
-                    _buildRecommendedCard('assets/images/adl.png', '+2.72', '0.4976', size),
-                  ],
+                SlideInRight(
+                  from: 200,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildRecommendedCard('assets/images/bnb.png', '+1.37', '216.3', size),
+                      _buildRecommendedCard('assets/images/adl.png', '+2.72', '0.4976', size),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 20),
                 Text(
@@ -154,11 +160,20 @@ class _WalletPageState extends State<WalletPage> {
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
                 SizedBox(height: 10),
-                _buildAssetCard(
-                    'assets/images/bitcoin.png', '\$4,500.00', '-4.5%', '0.0000056 BTC'),
-                _buildAssetCard('assets/images/tether.png', '\$2,200.00', '+4.5%', '2,600 USDT'),
-                _buildAssetCard('assets/images/ether.png', '\$2,000.00', '+2.1%', '0.0034 ETH'),
-                _buildAssetCard('assets/images/chain.png', '\$800.00', '+2.1%', '0.0034 ETH'),
+                SlideInRight(
+                  from: 300,
+                  child: _buildAssetCard(
+                      'assets/images/bitcoin.png', '\$4,500.00', '-4.5%', '0.0000056 BTC'),
+                ),
+                SlideInRight(
+                  from: 350,
+                    child: _buildAssetCard('assets/images/tether.png', '\$2,200.00', '+4.5%', '2,600 USDT')),
+                SlideInRight(
+                  from: 400,
+                    child: _buildAssetCard('assets/images/ether.png', '\$2,000.00', '+2.1%', '0.0034 ETH')),
+                SlideInRight(
+                  from: 450,
+                    child: _buildAssetCard('assets/images/chain.png', '\$800.00', '+2.1%', '0.0034 ETH')),
               ],
             ),
           ),
