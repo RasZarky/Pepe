@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 import '../bottomNavBar/bottom_nav_bar.dart';
@@ -7,19 +8,21 @@ class AnalysisPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xFF12122C),
+    return Scaffold(
+      backgroundColor: const Color(0xFF12122C),
       body: Center(
-        child: Text(
-          "Analysis",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+        child: JelloIn(
+          child: const Text(
+            "Analysis",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBarWidget(selectedindex: 2,),
+      bottomNavigationBar: const BottomNavigationBarWidget(selectedindex: 2,),
     );
   }
 }
