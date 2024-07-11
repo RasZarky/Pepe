@@ -7,7 +7,6 @@ import 'package:pepe/home/widgets/asset_card.dart';
 import 'package:pepe/home/widgets/header.dart';
 import 'package:pepe/home/widgets/order_card.dart';
 import 'package:pepe/home/widgets/prediction.dart';
-
 import '../bottomNavBar/bottom_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -45,6 +44,8 @@ class _HomePageState extends State<HomePage> {
   late Timer _timer;
   int _start = 20;
   String action = "BUY";
+  int time = 15;
+  int amount = 10;
 
   void startTimer() {
     const oneSec = Duration(seconds: 1);
@@ -80,7 +81,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xFF1F1C2C),
+        backgroundColor: const Color(0xFF12122C),
       body: SafeArea(
         child: SingleChildScrollView(
 
@@ -146,8 +147,35 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildTimeAmountButton('15mins'),
-                  _buildTimeAmountButton('10\$'),
+                  _buildTimeAmountButton(time,"mins", (){
+                    if(time > 5 && !running && !ended){
+                      setState(() {
+                        time = time - 5;
+                      });
+                    }
+                  },
+                          (){
+                        if(time < 30 && !running && !ended){
+                          setState(() {
+                            time = time + 5;
+                          });
+                        }
+                      }
+                  ),
+                  _buildTimeAmountButton(amount,"\$", (){
+                    if(amount > 5 && !running && !ended){
+                      setState(() {
+                        amount = amount - 5;
+                      });
+                    }
+                  },
+                          (){
+                        if(amount < 100 && !running && !ended){
+                          setState(() {
+                            amount = amount + 5;
+                          });
+                        }
+                      }),
                 ],
               ),
 
@@ -282,15 +310,15 @@ class _HomePageState extends State<HomePage> {
 
                 const SizedBox( width: 20,),
 
-                const Column(
+                Column(
                   children: [
-                    Text(
+                    const Text(
                       '\$',
                       style: TextStyle(color: Colors.grey),
                     ),
                     Text(
-                      '\$5',
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                      '\$$amount',
+                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -596,7 +624,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
 
-  Widget _buildTimeAmountButton(String label) {
+  Widget _buildTimeAmountButton(int label, String extension, void Function() minusTap, void Function() plusTap) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 8),
@@ -610,12 +638,18 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(width: 0,),
-              Icon(Icons.remove, color: Color(0xFF9146FF),),
+              GestureDetector(
+                onTap: minusTap,
+                  child: const Icon(Icons.remove, color: Color(0xFF9146FF),)
+              ),
               Text(
-                label,
+                "$label$extension",
                 style: TextStyle(color: Colors.white,),
               ),
-              Icon(Icons.add, color: Color(0xFF9146FF)),
+              GestureDetector(
+                  onTap: plusTap,
+                  child: const Icon(Icons.add, color: Color(0xFF9146FF))
+              ),
               SizedBox(width: 0,),
             ],
           ),
