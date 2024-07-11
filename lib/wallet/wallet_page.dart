@@ -13,6 +13,7 @@ class WalletPage extends StatefulWidget {
 class _WalletPageState extends State<WalletPage> {
   @override
   Widget build(BuildContext context) {
+    double size = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Color(0xFF12122C),
       bottomNavigationBar: BottomNavigationBarWidget(selectedindex: 1,),
@@ -23,8 +24,8 @@ class _WalletPageState extends State<WalletPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Wallett',
+                const Text(
+                  'Wallet',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -143,8 +144,8 @@ class _WalletPageState extends State<WalletPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _buildRecommendedCard('assets/images/bnb.png', '+1.37', '216.3'),
-                    _buildRecommendedCard('assets/images/adl.png', '+2.72', '0.4976'),
+                    _buildRecommendedCard('assets/images/bnb.png', '+1.37', '216.3', size),
+                    _buildRecommendedCard('assets/images/adl.png', '+2.72', '0.4976', size),
                   ],
                 ),
                 SizedBox(height: 20),
@@ -167,12 +168,12 @@ class _WalletPageState extends State<WalletPage> {
   }
 }
 
-Widget _buildRecommendedCard(String image, String change, String value) {
+Widget _buildRecommendedCard(String image, String change, String value, double size) {
   return Container(
-    width: 150,
-    padding: EdgeInsets.all(16),
+    width: size * 0.44,
+    padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-      color: Color(0xFF1C1C44),
+      color: const Color(0xFF1C1C44),
       borderRadius: BorderRadius.circular(16),
     ),
     child: Column(
@@ -219,7 +220,7 @@ Widget _buildAssetCard(
             Image.asset(name),
             Text(
               amount,
-              style: TextStyle(color: Colors.white, fontSize: 16),
+              style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
           ],
         ),
@@ -239,10 +240,10 @@ Widget _buildAssetCard(
                 ),
               ],
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
               quantity,
-              style: TextStyle(color: Colors.grey, fontSize: 12),
+              style: const TextStyle(color: Colors.grey, fontSize: 12),
             ),
           ],
         ),

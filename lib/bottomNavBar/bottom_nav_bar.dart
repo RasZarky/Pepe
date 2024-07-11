@@ -25,7 +25,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Home',
@@ -46,10 +46,10 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
       currentIndex: widget.selectedindex,
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.grey,
-      backgroundColor: Color(0xFF181A20),
+      backgroundColor:  const Color(0xFF4A4E69),
       onTap: _onItemTapped,
       type: BottomNavigationBarType.fixed,
-      showSelectedLabels: false,
+      showSelectedLabels: true,
       showUnselectedLabels: false,
     );
   }

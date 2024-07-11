@@ -34,12 +34,9 @@ class OrderCard extends StatelessWidget {
                         color: color.withOpacity(0.3),
                         borderRadius: BorderRadius.circular(50),
                       ),
-                      child: Icon(
-                        type == 'SELL' ? Icons.arrow_downward : Icons.arrow_upward,
-                        color: color,
-                      ),
+                      child: Image.asset(type == "BUY" ? "assets/images/buy.png" : "assets/images/sell.png")
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Text(
                       type,
                       style: TextStyle(
