@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 import '../bottomNavBar/bottom_nav_bar.dart';
@@ -7,15 +8,19 @@ class Profilepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xFF12122C),
+    return Scaffold(
+      backgroundColor: const Color(0xFF12122C),
       body: Center(
-        child: Text(
-          "Profile",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+        child: BounceInUp(
+          from: 150,
+          curve: Curves.easeInOutBack,
+          child: const Text(
+            "Profile",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
