@@ -33,7 +33,7 @@ class _WalletPageState extends State<WalletPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SlideInRight(
                   child: Container(
                     padding: EdgeInsets.all(16),
@@ -138,12 +138,12 @@ class _WalletPageState extends State<WalletPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   'Recommended',
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 SlideInRight(
                   from: 200,
                   child: Row(
@@ -154,8 +154,8 @@ class _WalletPageState extends State<WalletPage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   'My Assets',
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),

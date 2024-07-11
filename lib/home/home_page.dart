@@ -1,8 +1,7 @@
 import 'dart:async';
-
+import 'package:animate_do/animate_do.dart';
 import 'package:crypto_market/Crypto_Market/Model/coin_model.dart';
 import 'package:crypto_market/Crypto_Market/Screens/coin_candle_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pepe/home/widgets/asset_card.dart';
 import 'package:pepe/home/widgets/header.dart';
@@ -104,38 +103,43 @@ class _HomePageState extends State<HomePage> {
 
               SizedBox(height: 10),
 
-            Container(
-              height: 70,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: assets.length + 1,
-                itemBuilder: (context, index) {
-                  if (index == assets.length) {
-                    return _buildAddCard();
-                  } else {
-                    final asset = assets[index];
-                    return AssetCard(
-                      name:  asset['name'],
-                      symbol:  asset['symbol'],
-                      price:  asset['price'],
-                      change:  asset['change'],
-                      color:  asset['color'],
-                      image: asset['image'],
-                    );
-                  }
-                },
+              SlideInRight(
+              child: Container(
+                height: 70,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: assets.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index == assets.length) {
+                      return _buildAddCard();
+                    } else {
+                      final asset = assets[index];
+                      return AssetCard(
+                        name:  asset['name'],
+                        symbol:  asset['symbol'],
+                        price:  asset['price'],
+                        change:  asset['change'],
+                        color:  asset['color'],
+                        image: asset['image'],
+                      );
+                    }
+                  },
+                ),
               ),
             ),
 
               SizedBox(height: 20),
 
-              Container(
-                height: 400,
-                padding: EdgeInsets.only(top: 6),
-                decoration: BoxDecoration(
-                    color: Color(0xFF4A4E69),
-                    borderRadius: BorderRadius.circular(15.0),),
-                  child: candleChart()),
+              SlideInLeft(
+                from: 150,
+                child: Container(
+                  height: 400,
+                  padding: EdgeInsets.only(top: 6),
+                  decoration: BoxDecoration(
+                      color: Color(0xFF4A4E69),
+                      borderRadius: BorderRadius.circular(15.0),),
+                    child: candleChart()),
+              ),
 
               SizedBox(height: 20),
 
@@ -149,32 +153,38 @@ class _HomePageState extends State<HomePage> {
 
               SizedBox(height: 20),
 
-              running ? Column(
-                children: [
-                  _runningSection(),
-                  const SizedBox(height: 20,)
-                ],
-              ) : ended ? Column(
-                children: [
-                  _endedSection(),
-                  const SizedBox(height: 20,)
-                ],
+              running ? FadeIn(
+                child: Column(
+                  children: [
+                    _runningSection(),
+                    const SizedBox(height: 20,)
+                  ],
+                ),
+              ) : ended ? FadeIn(
+                child: Column(
+                  children: [
+                    _endedSection(),
+                    const SizedBox(height: 20,)
+                  ],
+                ),
               )  :
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _buildPredictionButton('BUY', Colors.green),
-                      _buildPredictionButton('SELL', Colors.red),
-                    ],
-                  ),
-
-                  SizedBox(height: 15),
-
-                  BuildPrediction(),
-                ],
+              FadeIn(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _buildPredictionButton('BUY', Colors.green),
+                        _buildPredictionButton('SELL', Colors.red),
+                      ],
+                    ),
+                
+                    SizedBox(height: 15),
+                
+                    BuildPrediction(),
+                  ],
+                ),
               ),
 
               const Text("Predictions",
@@ -188,29 +198,37 @@ class _HomePageState extends State<HomePage> {
                 height: 330,
                 child: ListView(
                   children: [
-                    OrderCard(
-                      type: 'SELL',
-                      amount: '\$2,500.00',
-                      btcAmount: '0.0000046 BTC',
-                      color: Colors.red,
+                    FadeInUp(
+                      child: OrderCard(
+                        type: 'SELL',
+                        amount: '\$2,500.00',
+                        btcAmount: '0.0000046 BTC',
+                        color: Colors.red,
+                      ),
                     ),
-                    OrderCard(
-                      type: 'BUY',
-                      amount: '\$4,500.00',
-                      btcAmount: '0.0000056 BTC',
-                      color: Colors.green,
+                    FadeInUp(
+                      child: OrderCard(
+                        type: 'BUY',
+                        amount: '\$4,500.00',
+                        btcAmount: '0.0000056 BTC',
+                        color: Colors.green,
+                      ),
                     ),
-                    OrderCard(
-                      type: 'SELL',
-                      amount: '\$2,500.00',
-                      btcAmount: '0.0000046 BTC',
-                      color: Colors.red,
+                    FadeInUp(
+                      child: OrderCard(
+                        type: 'SELL',
+                        amount: '\$2,500.00',
+                        btcAmount: '0.0000046 BTC',
+                        color: Colors.red,
+                      ),
                     ),
-                    OrderCard(
-                      type: 'BUY',
-                      amount: '\$4,500.00',
-                      btcAmount: '0.0000056 BTC',
-                      color: Colors.green,
+                    FadeInUp(
+                      child: OrderCard(
+                        type: 'BUY',
+                        amount: '\$4,500.00',
+                        btcAmount: '0.0000056 BTC',
+                        color: Colors.green,
+                      ),
                     ),
                   ],
                 ),
