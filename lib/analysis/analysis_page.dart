@@ -1,6 +1,5 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-
 import '../bottomNavBar/bottom_nav_bar.dart';
 
 class AnalysisPage extends StatelessWidget {
@@ -22,7 +21,9 @@ class AnalysisPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomNavigationBarWidget(selectedindex: 2,),
+      bottomNavigationBar: const BottomNavigationBarWidget(
+        selectedIndex: 2,
+      ),
     );
   }
 }

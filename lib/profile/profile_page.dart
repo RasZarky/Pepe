@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../bottomNavBar/bottom_nav_bar.dart';
 
-class Profilepage extends StatelessWidget {
-  const Profilepage({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,9 @@ class Profilepage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBarWidget(selectedindex: 3,),
+      bottomNavigationBar: const BottomNavigationBarWidget(
+        selectedIndex: 3,
+      ),
     );
   }
 }
